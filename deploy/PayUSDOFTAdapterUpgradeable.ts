@@ -3,7 +3,7 @@ import { type DeployFunction } from 'hardhat-deploy/types'
 import { EndpointId, endpointIdToNetwork } from '@layerzerolabs/lz-definitions'
 import { getDeploymentAddressAndAbi } from '@layerzerolabs/lz-evm-sdk-v2'
 
-const contractName = 'MyOFTAdapterFeeUpgradeable'
+const contractName = 'PayUSDOFTAdapterUpgradeable'
 
 const deploy: DeployFunction = async (hre) => {
     const { deploy } = hre.deployments
@@ -17,7 +17,7 @@ const deploy: DeployFunction = async (hre) => {
 
     await deploy(contractName, {
         from: signer.address,
-        args: ['0x', address], // replace '0x' with the address of the ERC-20 token
+        args: ['0x6c3ea9036406852006290770BEdFcAbA0e23A0e8', address],
         log: true,
         waitConfirmations: 1,
         skipIfAlreadyDeployed: false,

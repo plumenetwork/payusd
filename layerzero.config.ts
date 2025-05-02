@@ -1,60 +1,45 @@
 import { EndpointId } from '@layerzerolabs/lz-definitions'
+import { ExecutorOptionType } from '@layerzerolabs/lz-v2-utilities';
+import {generateConnectionsConfig} from '@layerzerolabs/metadata-tools';
+import type { OAppEnforcedOption, OmniPointHardhat } from '@layerzerolabs/toolbox-hardhat'
 
-import type { OAppOmniGraphHardhat, OmniPointHardhat } from '@layerzerolabs/toolbox-hardhat'
-
-const sepoliaContract: OmniPointHardhat = {
-    eid: EndpointId.SEPOLIA_V2_TESTNET,
-    contractName: 'MyOFTUpgradeable',
+const ethereumContract: OmniPointHardhat = {
+    eid: EndpointId.ETHEREUM_V2_MAINNET,
+    contractName: 'PayUSDOFTAdapterUpgradeable',
 }
 
-const fujiContract: OmniPointHardhat = {
-    eid: EndpointId.AVALANCHE_V2_TESTNET,
-    contractName: 'MyOFTUpgradeable',
+const plumePhoenixContract: OmniPointHardhat = {
+    eid: EndpointId.PLUMEPHOENIX_V2_MAINNET,
+    contractName: 'PayUSDOFTUpgradeable',
 }
 
-const amoyContract: OmniPointHardhat = {
-    eid: EndpointId.AMOY_V2_TESTNET,
-    contractName: 'MyOFTUpgradeable',
-}
-
-const config: OAppOmniGraphHardhat = {
-    contracts: [
-        {
-            contract: fujiContract,
-        },
-        {
-            contract: sepoliaContract,
-        },
-        {
-            contract: amoyContract,
-        },
-    ],
-    connections: [
-        {
-            from: fujiContract,
-            to: sepoliaContract,
-        },
-        {
-            from: fujiContract,
-            to: amoyContract,
-        },
-        {
-            from: sepoliaContract,
-            to: fujiContract,
-        },
-        {
-            from: sepoliaContract,
-            to: amoyContract,
-        },
-        {
-            from: amoyContract,
-            to: sepoliaContract,
-        },
-        {
-            from: amoyContract,
-            to: fujiContract,
-        },
-    ],
-}
-
-export default config
+const EVM_ENFORCED_OPTIONS: OAppEnforcedOption[] = [
+    {
+      msgType: 1,
+      optionType: ExecutorOptionType.LZ_RECEIVE,
+      gas: 120000,
+      value: 0,
+    }
+  ];
+  
+  export default async function () {
+    // note: pathways declared here are automatically bidirectional
+    // if you declare A,B there's no need to declare B,A
+    const connections = await generateConnectionsConfig([
+      [
+        ethereumContract, // Chain A contract
+        plumePhoenixContract, // Chain B contract
+        [['LayerZero Labs', 'Stargate'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
+        [15, 1], // [A to B confirmations, B to A confirmations]
+        [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain B enforcedOptions, Chain A enforcedOptions
+      ],
+    ]);
+  
+    return {
+      contracts: [
+            {contract: ethereumContract},
+            {contract: plumePhoenixContract}
+      ],
+      connections,
+    };
+  }
