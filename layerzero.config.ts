@@ -37,8 +37,20 @@ const EVM_ENFORCED_OPTIONS: OAppEnforcedOption[] = [
   
     return {
       contracts: [
-            {contract: ethereumContract},
-            {contract: plumePhoenixContract}
+            {
+              contract: ethereumContract,
+              config: {
+                delegate: '0xcb7549474fed2d886b60ea2946e56bea2e8bddd3',
+                owner: '0xcb7549474fed2d886b60ea2946e56bea2e8bddd3'
+              }
+            },
+            {
+              contract: plumePhoenixContract,
+              config: {
+                delegate: '0x65392FEb0aC862844105EdFd57C5ce58DAbE5362',
+                owner: '0x65392FEb0aC862844105EdFd57C5ce58DAbE5362'
+              }
+            }
       ],
       connections,
     };
