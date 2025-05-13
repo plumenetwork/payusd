@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 import { OFTTest } from "@layerzerolabs/oft-evm-upgradeable/test/OFT.t.sol";
-import { MyOFTAdapterUpgradeable } from "../../contracts/MyOFTAdapterUpgradeable.sol";
+import { PayUSDOFTAdapterUpgradeable as MyOFTAdapterUpgradeable } from "../../contracts/PayUSDOFTAdapterUpgradeable.sol";
 import { EndpointV2Mock } from "@layerzerolabs/test-devtools-evm-foundry/contracts/mocks/EndpointV2Mock.sol";
-import { MyOFTUpgradeable } from "../../contracts/MyOFTUpgradeable.sol";
+import { PayUSDOFTUpgradeable as MyOFTUpgradeable } from "../../contracts/PayUSDOFTUpgradeable.sol";
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 contract MyOFTUpgradeableTest is OFTTest {

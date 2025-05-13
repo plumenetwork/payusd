@@ -1,0 +1,34 @@
+{
+  "coreSpot": {
+    "name": "PLUME",
+    "szDecimals": 2,
+    "weiDecimals": 8,
+    "index": 227,
+    "tokenId": "0x8a008852ff36d4303690fb168d6cc542",
+    "isCanonical": false,
+    "evmContract": {
+      "address": "0xCc0f1A2A451fb7bb0c97602E890Ef0FE8B6B2e15",
+      "evm_extra_wei_decimals": 10
+    },
+    "fullName": "Plume",
+    "deployerTradingFeeShare": "1.0"
+  },
+  "txData": {
+    "txHash": "0x2e29039f16ea40a787b1a7e2a17d59e6a4f009a985af8bc560710a126622d92d",
+    "nonce": 3,
+    "from": "0xeb88689edB1f0B73AC29E1b267A0a102e9a047df",
+    "weiDiff": 10,
+    "assetBridgeAddress": "0x20000000000000000000000000000000000000e3",
+    "connected": false
+  },
+  "userGenesis": {
+    "userAndWei": [
+      {
+        "address": "0x20000000000000000000000000000000000000e3",
+        "wei": "18446744073709551615"
+      }
+    ],
+    "existingTokenAndWei": [],
+    "blacklistUsers": []
+  }
+}
