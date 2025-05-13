@@ -1,0 +1,34 @@
+{
+  "coreSpot": {
+    "name": "BAPE",
+    "szDecimals": 2,
+    "weiDecimals": 8,
+    "index": 1310,
+    "tokenId": "0x173640046cc8d96297962954960bd23b",
+    "isCanonical": false,
+    "evmContract": {
+      "address": "0x38a411b46fdb0bCd833440c0379cBd6C0495Ba1C",
+      "evm_extra_wei_decimals": 10
+    },
+    "fullName": "",
+    "deployerTradingFeeShare": "0.0"
+  },
+  "txData": {
+    "txHash": "0xf93afacd5ba366ad4a287543ae1274b949a7737bde90923cc9677685c0e0d718",
+    "nonce": 217,
+    "from": "0xa3824BFfc05178b1eD611117e5b900adCb189b94",
+    "weiDiff": 10,
+    "assetBridgeAddress": "0x200000000000000000000000000000000000051e",
+    "connected": false
+  },
+  "userGenesis": {
+    "userAndWei": [
+      {
+        "address": "0x200000000000000000000000000000000000051e",
+        "wei": "18446744073709551615"
+      }
+    ],
+    "existingTokenAndWei": [],
+    "blacklistUsers": []
+  }
+}
