@@ -68,6 +68,17 @@ const config: HardhatUserConfig = {
             url: 'https://phoenix-rpc.plumenetwork.xyz',
             accounts,
         },
+        'hyperevm-mainnet': {
+            eid: EndpointId.HYPERLIQUID_V2_MAINNET,
+            url: process.env.RPC_URL_HYPEREVM_MAINNET || 'https://rpc.hyperliquid-mainnet.xyz/evm',
+            accounts,
+        },
+        'hyperevm-testnet': {
+            eid: EndpointId.HYPERLIQUID_V2_TESTNET,
+            url: process.env.RPC_URL_HYPEREVM_TESTNET || 'https://rpc.hyperliquid-testnet.xyz/evm',
+            accounts,
+        },
+
         hardhat: {
             // Need this for testing because TestHelperOz5.sol is exceeding the compiled contract size limit
             allowUnlimitedContractSize: true,
