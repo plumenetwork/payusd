@@ -68,6 +68,11 @@ const config: HardhatUserConfig = {
             url: 'https://phoenix-rpc.plumenetwork.xyz',
             accounts,
         },
+        'bsc-mainnet': {
+            eid: EndpointId.BSC_V2_MAINNET,
+            url: process.env.RPC_URL_BSC_MAINNET || 'https://bsc-dataseed.binance.org',
+            accounts,
+        },
         'hyperevm-mainnet': {
             eid: EndpointId.HYPERLIQUID_V2_MAINNET,
             url: process.env.RPC_URL_HYPEREVM_MAINNET || 'https://rpc.hyperliquid-mainnet.xyz/evm',
