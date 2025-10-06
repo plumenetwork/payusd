@@ -42,6 +42,7 @@ if (accounts == null) {
     )
 }
 console.log("RPC_URL_BSC_MAINNET",process.env.RPC_URL_BSC_MAINNET);
+console.log("RPC_URL_ETH_MAINNET",process.env.RPC_URL_ETH_MAINNET);
 
 const config: HardhatUserConfig = {
     plugins: [
@@ -67,7 +68,7 @@ const config: HardhatUserConfig = {
     networks: {
         'ethereum-mainnet': {
             eid: EndpointId.ETHEREUM_V2_MAINNET,
-            url: 'https://gateway.tenderly.co/public/mainnet',
+            url: process.env.RPC_URL_ETH_MAINNET,
             accounts,
             safeConfig: {
                 safeUrl: 'https://api.safe.global/tx-service/eth', // URL of the Safe Transaction Service for the network
@@ -82,7 +83,7 @@ const config: HardhatUserConfig = {
         
         'bsc-mainnet': {
             eid: EndpointId.BSC_V2_MAINNET,
-            url: process.env.RPC_URL_BSC_MAINNET || 'https://bsc-dataseed.binance.org',
+            url: process.env.RPC_URL_BSC_MAINNET,
             accounts,
             safeConfig: {
                 safeUrl: 'https://api.safe.global/tx-service/bnb', // URL of the Safe Transaction Service for the network
