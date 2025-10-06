@@ -29,8 +29,8 @@ export default async function () {
         [
             ethereumMainnetContract,
             bscMainnetContract,
-            [['LayerZero Labs', 'Stargate'], []],
-            [5, 5],
+            [['LayerZero Labs', 'Google Cloud'], []],
+            [20, 15],
             [ENFORCED, ENFORCED],
         ],
     ])
