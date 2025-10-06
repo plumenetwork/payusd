@@ -69,6 +69,10 @@ const config: HardhatUserConfig = {
             eid: EndpointId.ETHEREUM_V2_MAINNET,
             url: 'https://gateway.tenderly.co/public/mainnet',
             accounts,
+            safeConfig: {
+                safeUrl: 'https://api.safe.global/tx-service/eth', // URL of the Safe Transaction Service for the network
+                safeAddress: '0x5A85C2998E4a49C5A2857731c007c2Ac16D07eA4' // Address of the Safe wallet for the network
+            }
         },
         'plumephoenix-mainnet': {
             eid: EndpointId.PLUMEPHOENIX_V2_MAINNET,
@@ -79,9 +83,11 @@ const config: HardhatUserConfig = {
         'bsc-mainnet': {
             eid: EndpointId.BSC_V2_MAINNET,
             url: process.env.RPC_URL_BSC_MAINNET || 'https://bsc-dataseed.binance.org',
-            gas: 25000000,
-            gasPrice: 3000000000,
             accounts,
+            safeConfig: {
+                safeUrl: 'https://api.safe.global/tx-service/bnb', // URL of the Safe Transaction Service for the network
+                safeAddress: '0x5A85C2998E4a49C5A2857731c007c2Ac16D07eA4' // Address of the Safe wallet for the network
+            }
         },
         /*
         'bsc-local': {
