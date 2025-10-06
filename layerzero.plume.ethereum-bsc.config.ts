@@ -19,7 +19,7 @@ const ENFORCED: OAppEnforcedOption[] = [
     {
         msgType: 1,
         optionType: ExecutorOptionType.LZ_RECEIVE,
-        gas: 120000,
+        gas: 80000,
         value: 0,
     },
 ]
@@ -32,7 +32,7 @@ export default async function () {
             [['LayerZero Labs', 'Google Cloud'], []],
             [20, 15],
             [ENFORCED, ENFORCED],
-        ],
+        ],  
     ])
 
     return {
