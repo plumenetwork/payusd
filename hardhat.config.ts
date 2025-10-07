@@ -5,14 +5,15 @@
 // - Fill in the environment variables
 import 'dotenv/config'
 
-import '@openzeppelin/hardhat-upgrades'
+//import '@openzeppelin/hardhat-upgrades'
 import 'hardhat-deploy'
 import '@nomiclabs/hardhat-waffle'
 import 'hardhat-deploy-ethers'
 import 'hardhat-contract-sizer'
 import '@nomiclabs/hardhat-ethers'
 import '@layerzerolabs/toolbox-hardhat'
-
+const { vars } = require("hardhat/config");
+import hardhatVerify from "@nomicfoundation/hardhat-verify";
 import { HardhatUserConfig, HttpNetworkAccountsUserConfig } from 'hardhat/types'
 
 import { EndpointId } from '@layerzerolabs/lz-definitions'
@@ -27,6 +28,7 @@ const MNEMONIC = process.env.MNEMONIC
 
 // If you prefer to be authenticated using a private key, set a PRIVATE_KEY environment variable
 const PRIVATE_KEY = process.env.PRIVATE_KEY
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 
 const accounts: HttpNetworkAccountsUserConfig | undefined = MNEMONIC
     ? { mnemonic: MNEMONIC }
@@ -39,8 +41,14 @@ if (accounts == null) {
         'Could not find MNEMONIC or PRIVATE_KEY environment variables. It will not be possible to execute transactions in your example.'
     )
 }
+console.log("RPC_URL_BSC_MAINNET",process.env.RPC_URL_BSC_MAINNET);
+console.log("RPC_URL_ETH_MAINNET",process.env.RPC_URL_ETH_MAINNET);
 
 const config: HardhatUserConfig = {
+    plugins: [
+        hardhatVerify,
+
+      ],
     paths: {
         cache: 'cache/hardhat',
     },
@@ -60,30 +68,60 @@ const config: HardhatUserConfig = {
     networks: {
         'ethereum-mainnet': {
             eid: EndpointId.ETHEREUM_V2_MAINNET,
-            url: 'https://gateway.tenderly.co/public/mainnet',
+            url: process.env.RPC_URL_ETH_MAINNET,
             accounts,
+            safeConfig: {
+                safeUrl: 'https://api.safe.global/tx-service/eth', // URL of the Safe Transaction Service for the network
+                safeAddress: '0x5A85C2998E4a49C5A2857731c007c2Ac16D07eA4' // Address of the Safe wallet for the network
+            }
         },
         'plumephoenix-mainnet': {
             eid: EndpointId.PLUMEPHOENIX_V2_MAINNET,
             url: 'https://phoenix-rpc.plumenetwork.xyz',
             accounts,
         },
-        'hyperevm-mainnet': {
+        
+        'bsc-mainnet': {
+            eid: EndpointId.BSC_V2_MAINNET,
+            url: process.env.RPC_URL_BSC_MAINNET,
+            accounts,
+            safeConfig: {
+                safeUrl: 'https://api.safe.global/tx-service/bnb', // URL of the Safe Transaction Service for the network
+                safeAddress: '0x5A85C2998E4a49C5A2857731c007c2Ac16D07eA4' // Address of the Safe wallet for the network
+            }
+        },
+        /*
+        'bsc-local': {
+            eid: EndpointId.BSC_V2_MAINNET,
+            url: 'http://127.0.0.1:8545',
+            chainId: 56,
+            accounts: [process.env.PRIVATE_KEY || '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'],
+        },
+        */
+        'hyperliquid-mainnet': {
             eid: EndpointId.HYPERLIQUID_V2_MAINNET,
             url: process.env.RPC_URL_HYPEREVM_MAINNET || 'https://rpc.hyperliquid-mainnet.xyz/evm',
             accounts,
         },
-        'hyperevm-testnet': {
+        'hyperliquid-testnet': {
             eid: EndpointId.HYPERLIQUID_V2_TESTNET,
             url: process.env.RPC_URL_HYPEREVM_TESTNET || 'https://rpc.hyperliquid-testnet.xyz/evm',
             accounts,
         },
 
         hardhat: {
-            // Need this for testing because TestHelperOz5.sol is exceeding the compiled contract size limit
             allowUnlimitedContractSize: true,
-        },
+        }
     },
+
+      etherscan: {
+        // Your API key for Etherscan
+        // Obtain one at https://etherscan.io/
+        apiKey: {
+          bsc: ETHERSCAN_API_KEY
+        }
+      },
+
     namedAccounts: {
         deployer: {
             default: 0, // wallet address of index[0], of the mnemonic in .env
